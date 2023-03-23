@@ -9,5 +9,7 @@ class Window {
     public:
         Window();
         ~Window();
+        unsigned int getWidth();
+        unsigned int getHeight();
 
 };

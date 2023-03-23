@@ -67,6 +67,14 @@ Window::~Window(){
     glfwTerminate();
 }
 
+
+Window::getHeight(){
+    return m_height;
+}
+
+Window::getWidth(){
+    return m_width;
+}
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
