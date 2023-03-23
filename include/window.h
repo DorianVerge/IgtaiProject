@@ -1,3 +1,13 @@
 #pragma once 
+#include "defines.h"
 
-int createWindow();
+class Window {
+    private:
+        GLFWwindow* window;
+        unsigned int m_width;
+        unsigned int m_height;    
+    public:
+        Window();
+        ~Window();
+
+};
