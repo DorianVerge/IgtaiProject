@@ -38,6 +38,7 @@ Window::Window()  {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
+
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -68,13 +69,15 @@ Window::~Window(){
 }
 
 
-Window::getHeight(){
+unsigned int Window::getHeight(){
     return m_height;
 }
 
-Window::getWidth(){
+unsigned int Window::getWidth(){
     return m_width;
 }
+
+
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)
