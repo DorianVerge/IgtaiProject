@@ -8,13 +8,28 @@ void processInput(GLFWwindow *window);
 
 
 Window::Window()  {
-    // glfw: initialize and configure
-    // ------------------------------
-    glfwInit();
+
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
     m_width = (mode->width*2/3);
     m_height = (mode->height*2/3);
+    
+}
+
+Window::~Window(){
+    glfwTerminate();
+}
+
+
+unsigned int Window::getHeight(){
+    return m_height;
+}
+
+unsigned int Window::getWidth(){
+    return m_width;
+}
+
+void Window :: createWindow(){
     glfwWindowHint(GLFW_RED_BITS, mode->redBits);
     glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
     glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
@@ -59,25 +74,8 @@ Window::Window()  {
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
-    // glfw: terminate, clearing all previously allocated GLFW resources.
-    // ------------------------------------------------------------------
     
 }
-
-Window::~Window(){
-    glfwTerminate();
-}
-
-
-unsigned int Window::getHeight(){
-    return m_height;
-}
-
-unsigned int Window::getWidth(){
-    return m_width;
-}
-
-
 // process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
 // ---------------------------------------------------------------------------------------------------------
 void processInput(GLFWwindow *window)

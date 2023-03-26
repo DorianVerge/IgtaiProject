@@ -3,5 +3,9 @@
 
 int main()
 {
-    Window();
+    // glfw: initialize and configure
+    glfwInit();
+    // create window
+    Window myWindow=Window();
+    myWindow.createWindow();
 }
