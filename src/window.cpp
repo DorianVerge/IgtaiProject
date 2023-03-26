@@ -1,10 +1,11 @@
 #include "../include/defines.h"
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow *window);
+
 
 // settings
-
+// glfw: whenever the window size changed (by OS or user resize) this callback function executes
+// ---------------------------------------------------------------------------------------------
+void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 
 
 Window::Window()  {
@@ -14,22 +15,7 @@ Window::Window()  {
     m_width = (mode->width*2/3);
     m_height = (mode->height*2/3);
     
-}
-
-Window::~Window(){
-    glfwTerminate();
-}
-
-
-unsigned int Window::getHeight(){
-    return m_height;
-}
-
-unsigned int Window::getWidth(){
-    return m_width;
-}
-
-void Window :: createWindow(){
+    // glfw: initialize and configure
     glfwWindowHint(GLFW_RED_BITS, mode->redBits);
     glfwWindowHint(GLFW_GREEN_BITS, mode->greenBits);
     glfwWindowHint(GLFW_BLUE_BITS, mode->blueBits);
@@ -44,7 +30,7 @@ void Window :: createWindow(){
 
     // glfw window creation
     // --------------------
-    GLFWwindow* window = glfwCreateWindow(m_width, m_height, "ProjectScene", NULL ,NULL);
+    window = glfwCreateWindow(m_width, m_height, "ProjectScene", NULL ,NULL);
     if (window == NULL)
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -53,42 +39,29 @@ void Window :: createWindow(){
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
-
-    // glad: load all OpenGL function pointers
-    // ---------------------------------------
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-    }    
-
-    // render loop
-    // -----------
-    while (!glfwWindowShouldClose(window))
-    {
-        // input
-        // -----
-        processInput(window);
-
-        // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
-        // -------------------------------------------------------------------------------
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-    
-}
-// process all input: query GLFW whether relevant keys are pressed/released this frame and react accordingly
-// ---------------------------------------------------------------------------------------------------------
-void processInput(GLFWwindow *window)
-{
-    if(glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
 }
 
-// glfw: whenever the window size changed (by OS or user resize) this callback function executes
-// ---------------------------------------------------------------------------------------------
+Window::~Window(){
+    glfwTerminate();
+}
+
+GLFWwindow* Window::getWindow(){
+    return window;
+}
+unsigned int Window::getHeight(){
+    return m_height;
+}
+
+unsigned int Window::getWidth(){
+    return m_width;
+}
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and 
     // height will be significantly larger than specified on retina displays.
     glViewport(0, 0, width, height);
 }
+
+
+    
+

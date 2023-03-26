@@ -12,6 +12,6 @@ class Window {
         ~Window();
         unsigned int getWidth();
         unsigned int getHeight();
-        void createWindow();
+        GLFWwindow* getWindow();
 
 };
