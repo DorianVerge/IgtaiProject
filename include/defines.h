@@ -3,3 +3,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include "window.h"
+#include "shader.h"
+#include "mesh.h"
+#include <chrono>
+#include <thread>

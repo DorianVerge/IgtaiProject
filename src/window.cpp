@@ -6,14 +6,14 @@
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
 // ---------------------------------------------------------------------------------------------
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-
+void window_size_callback(GLFWwindow* window, int width, int height);
 
 Window::Window()  {
 
     GLFWmonitor* monitor = glfwGetPrimaryMonitor();
     const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-    m_width = (mode->width*2/3);
-    m_height = (mode->height*2/3);
+    m_width = (mode->width*3/5);
+    m_height = (mode->height*3/5);
     
     // glfw: initialize and configure
     glfwWindowHint(GLFW_RED_BITS, mode->redBits);
@@ -38,6 +38,16 @@ Window::Window()  {
     }
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetWindowSizeCallback(window, window_size_callback);
+    // Wait for the window to be displayed by the window manager
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+    // Calculate the window position to center it on the screen
+    int xPos = (mode->width - m_width) / 2;
+    int yPos = (mode->height - m_height) / 2;
+
+    // Set the window position
+    glfwSetWindowPos(window, xPos, yPos);
 
 }
 
@@ -62,6 +72,23 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
+void window_size_callback(GLFWwindow* window, int width, int height)
+{
+    float aspectRatio = 800.0f / 600.0f; // 4:3 aspect ratio
+    int newWidth = width;
+    int newHeight = static_cast<int>(width / aspectRatio);
+
+    if (newHeight > height)
+    {
+        newHeight = height;
+        newWidth = static_cast<int>(height * aspectRatio);
+    }
+
+    int xOffset = (width - newWidth) / 2;
+    int yOffset = (height - newHeight) / 2;
+
+    glViewport(xOffset, yOffset, newWidth, newHeight);
+}
 
     
 

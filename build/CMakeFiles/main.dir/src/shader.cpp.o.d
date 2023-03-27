@@ -1,7 +1,7 @@
-CMakeFiles/main.dir/src/window.cpp.o: \
- /home/dodo/workplace/IgtaiProject/src/window.cpp \
+CMakeFiles/main.dir/src/shader.cpp.o: \
+ /home/dodo/workplace/IgtaiProject/src/shader.cpp \
  /usr/include/stdc-predef.h \
- /home/dodo/workplace/IgtaiProject/src/../include/defines.h \
+ /home/dodo/workplace/IgtaiProject/include/defines.h \
  /home/dodo/workplace/IgtaiProject/include/glad/glad.h \
  /home/dodo/workplace/IgtaiProject/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
@@ -151,9 +151,9 @@ CMakeFiles/main.dir/src/window.cpp.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
- /home/dodo/workplace/IgtaiProject/src/../include/window.h \
- /home/dodo/workplace/IgtaiProject/src/../include/shader.h \
- /home/dodo/workplace/IgtaiProject/src/../include/mesh.h \
+ /home/dodo/workplace/IgtaiProject/include/window.h \
+ /home/dodo/workplace/IgtaiProject/include/shader.h \
+ /home/dodo/workplace/IgtaiProject/include/mesh.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/limits /usr/include/c++/11/ctime \
  /usr/include/c++/11/bits/parse_numbers.h /usr/include/c++/11/thread \
