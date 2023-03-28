@@ -26,6 +26,6 @@ Mesh::~Mesh()
 void Mesh::draw() const
 {
     glBindVertexArray(VAO);
-    glDrawArrays(GL_LINE_STRIP, 0, numVertices); // Change GL_TRIANGLES to GL_LINE_STRIP
+    glDrawArrays(GL_LINE_STRIP, 0, numVertices);
     glBindVertexArray(0);
 }

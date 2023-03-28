@@ -9,9 +9,8 @@ glm::vec3 BezierCurve::evaluate(float t) const {
 }
 
 std::vector<glm::vec3> BezierCurve::discretizeUniformParametric(int numSegments) const {
-    std::cout << "numSegments: " << numSegments << std::endl; // Add this line for debugging
     std::vector<glm::vec3> points;
-    for (int i = 0; i <= numSegments; ++i) {
+    for (int i = 0; i <= numSegments; ++i) { 
         float t = static_cast<float>(i) / numSegments;
         points.push_back(evaluate(t));
     }
@@ -25,6 +24,7 @@ glm::vec3 BezierCurve::deCasteljau(const std::vector<glm::vec3>& points, float t
 
     std::vector<glm::vec3> newPoints;
     for (size_t i = 0; i < points.size() - 1; ++i) {
+        ///std::cout << "points"  <<points[i+1].x << points[i+1].y << std::endl;
         newPoints.push_back(glm::mix(points[i], points[i + 1], t));
     }
 
