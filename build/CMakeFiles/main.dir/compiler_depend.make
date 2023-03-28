@@ -270,7 +270,14 @@ CMakeFiles/main.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/unique_ptr.h \
-  /usr/include/c++/11/bits/this_thread_sleep.h
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
 CMakeFiles/main.dir/src/mesh.cpp.o: ../src/mesh.cpp \
   /usr/include/stdc-predef.h \
@@ -474,7 +481,14 @@ CMakeFiles/main.dir/src/mesh.cpp.o: ../src/mesh.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/unique_ptr.h \
-  /usr/include/c++/11/bits/this_thread_sleep.h
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
 CMakeFiles/main.dir/src/shader.cpp.o: ../src/shader.cpp \
   /usr/include/stdc-predef.h \
@@ -678,7 +692,14 @@ CMakeFiles/main.dir/src/shader.cpp.o: ../src/shader.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/unique_ptr.h \
-  /usr/include/c++/11/bits/this_thread_sleep.h
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
 CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
   /usr/include/stdc-predef.h \
@@ -882,12 +903,27 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
   /usr/include/c++/11/bits/invoke.h \
   /usr/include/c++/11/bits/refwrap.h \
   /usr/include/c++/11/bits/unique_ptr.h \
-  /usr/include/c++/11/bits/this_thread_sleep.h
+  /usr/include/c++/11/bits/this_thread_sleep.h \
+  /usr/include/c++/11/fstream \
+  /usr/include/c++/11/bits/codecvt.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+  /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+  /usr/include/c++/11/bits/fstream.tcc \
+  /usr/include/c++/11/sstream \
+  /usr/include/c++/11/bits/sstream.tcc
 
 
 ../src/window.cpp:
 
+/usr/include/c++/11/sstream:
+
+/usr/include/c++/11/bits/fstream.tcc:
+
 ../src/mesh.cpp:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h:
+
+/usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h:
 
 /usr/include/c++/11/bits/refwrap.h:
 
@@ -968,6 +1004,8 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
 /usr/include/c++/11/bits/range_access.h:
 
 /usr/include/c++/11/bits/stl_function.h:
+
+/usr/include/c++/11/fstream:
 
 /usr/include/c++/11/ext/alloc_traits.h:
 
@@ -1055,6 +1093,8 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/libc-header-start.h:
 
+/usr/include/c++/11/bits/codecvt.h:
+
 /usr/include/c++/11/ctime:
 
 /usr/include/x86_64-linux-gnu/bits/time64.h:
@@ -1082,6 +1122,8 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
 /usr/include/c++/11/thread:
 
 /usr/include/stdio.h:
+
+/usr/include/c++/11/bits/sstream.tcc:
 
 /usr/include/x86_64-linux-gnu/bits/struct_rwlock.h:
 

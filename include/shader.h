@@ -1,12 +1,11 @@
 #pragma once
 
-#include <glad/glad.h>
-#include <string>
+#include "defines.h"
 
 class Shader
 {
 public:
-    Shader(const char* vertexSource, const char* fragmentSource);
+    Shader(const std::string& vertexPath, const std::string& fragmentPath);
     ~Shader();
     void use();
     unsigned int getProgram() const;
