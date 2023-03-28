@@ -10,10 +10,14 @@ void window_size_callback(GLFWwindow* window, int width, int height);
 
 Window::Window()  {
 
-    GLFWmonitor* monitor = glfwGetPrimaryMonitor();
-    const GLFWvidmode* mode = glfwGetVideoMode(monitor);
-    m_width = (mode->width*3/5);
-    m_height = (mode->height*3/5);
+    // Get the primary monitor
+    GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
+
+    // Get the video mode of the primary monitor
+    const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
+
+    m_width = (mode->width * 4 / 10);
+    m_height = (mode->height * 5 / 10);
     
     // glfw: initialize and configure
     glfwWindowHint(GLFW_RED_BITS, mode->redBits);
@@ -29,7 +33,6 @@ Window::Window()  {
 #endif
 
     // glfw window creation
-    // --------------------
     window = glfwCreateWindow(m_width, m_height, "ProjectScene", NULL ,NULL);
     if (window == NULL)
     {
@@ -42,11 +45,15 @@ Window::Window()  {
     // Wait for the window to be displayed by the window manager
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-    // Calculate the window position to center it on the screen
-    int xPos = (mode->width - m_width) / 2;
-    int yPos = (mode->height - m_height) / 2;
+    // Get the position of the primary monitor
+    int monitorX, monitorY;
+    glfwGetMonitorPos(primaryMonitor, &monitorX, &monitorY);
 
-    // Set the window position
+    // Calculate the window position to center it on the primary monitor
+    int xPos = monitorX + (mode->width - m_width) / 2;
+    int yPos = monitorY + (mode->height - m_height) / 2;
+
+    // Set the window position on the primary monitor
     glfwSetWindowPos(window, xPos, yPos);
 
 }
