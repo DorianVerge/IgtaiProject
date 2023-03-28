@@ -10,5 +10,5 @@ public:
     void draw() const;
 
 private:
-    unsigned int VAO, VBO;
+    unsigned int VAO, VBO,numVertices;
 };

@@ -1,5 +1,6 @@
 #include "../include/defines.h"
-
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 
 // settings
@@ -42,6 +43,23 @@ Window::Window()  {
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetWindowSizeCallback(window, window_size_callback);
+    // Charger l'image
+    int icon_width, icon_height, icon_channels;
+    unsigned char* icon_data = stbi_load("objects/SaleGeuleD'Andrew.png", &icon_width, &icon_height, &icon_channels, 0);
+    // Définir l'icône de la fenêtre
+    if (icon_data)
+    {
+        GLFWimage icon;
+        icon.width = icon_width;
+        icon.height = icon_height;
+        icon.pixels = icon_data;
+        glfwSetWindowIcon(window, 1, &icon);
+        stbi_image_free(icon_data);
+    }
+    else
+    {
+        std::cout << "Failed to load icon image" << std::endl;
+    }
     // Wait for the window to be displayed by the window manager
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
 

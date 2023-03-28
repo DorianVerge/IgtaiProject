@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/dodo/workplace/IgtaiProject/src/glad.c" "CMakeFiles/main.dir/src/glad.c.o" "gcc" "CMakeFiles/main.dir/src/glad.c.o.d"
+  "/home/dodo/workplace/IgtaiProject/src/bezierCurve.cpp" "CMakeFiles/main.dir/src/bezierCurve.cpp.o" "gcc" "CMakeFiles/main.dir/src/bezierCurve.cpp.o.d"
   "/home/dodo/workplace/IgtaiProject/src/main.cpp" "CMakeFiles/main.dir/src/main.cpp.o" "gcc" "CMakeFiles/main.dir/src/main.cpp.o.d"
   "/home/dodo/workplace/IgtaiProject/src/mesh.cpp" "CMakeFiles/main.dir/src/mesh.cpp.o" "gcc" "CMakeFiles/main.dir/src/mesh.cpp.o.d"
   "/home/dodo/workplace/IgtaiProject/src/shader.cpp" "CMakeFiles/main.dir/src/shader.cpp.o" "gcc" "CMakeFiles/main.dir/src/shader.cpp.o.d"

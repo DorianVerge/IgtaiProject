@@ -129,6 +129,30 @@ main/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 .PHONY : main/fast
 
+src/bezierCurve.o: src/bezierCurve.cpp.o
+.PHONY : src/bezierCurve.o
+
+# target to build an object file
+src/bezierCurve.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierCurve.cpp.o
+.PHONY : src/bezierCurve.cpp.o
+
+src/bezierCurve.i: src/bezierCurve.cpp.i
+.PHONY : src/bezierCurve.i
+
+# target to preprocess a source file
+src/bezierCurve.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierCurve.cpp.i
+.PHONY : src/bezierCurve.cpp.i
+
+src/bezierCurve.s: src/bezierCurve.cpp.s
+.PHONY : src/bezierCurve.s
+
+# target to generate assembly for a file
+src/bezierCurve.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierCurve.cpp.s
+.PHONY : src/bezierCurve.cpp.s
+
 src/glad.o: src/glad.c.o
 .PHONY : src/glad.o
 
@@ -258,6 +282,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... main"
+	@echo "... src/bezierCurve.o"
+	@echo "... src/bezierCurve.i"
+	@echo "... src/bezierCurve.s"
 	@echo "... src/glad.o"
 	@echo "... src/glad.i"
 	@echo "... src/glad.s"

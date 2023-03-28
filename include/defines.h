@@ -5,6 +5,7 @@
 #include "window.h"
 #include "shader.h"
 #include "mesh.h"
+#include "bezierCurve.h"
 #include <chrono>
 #include <thread>
 #include <fstream>

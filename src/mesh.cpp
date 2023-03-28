@@ -2,6 +2,7 @@
 
 Mesh::Mesh(float* vertices, unsigned int numVertices)
 {
+    this->numVertices=numVertices;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     
@@ -25,6 +26,6 @@ Mesh::~Mesh()
 void Mesh::draw() const
 {
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawArrays(GL_LINE_STRIP, 0, numVertices); // Change GL_TRIANGLES to GL_LINE_STRIP
     glBindVertexArray(0);
 }
