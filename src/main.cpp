@@ -17,27 +17,24 @@ int main() {
     
     Shader shader("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
 
-    std::vector<glm::vec3> controlPoints = {
-        glm::vec3(-0.5f, -0.5f, 0.0f),
-        glm::vec3(-0.25f, 0.5f, 0.0f),
-        glm::vec3(0.25f, -0.5f, 0.0f),
-        glm::vec3(0.8f, 0.8f, 0.0f)
+    std::vector<Vertex> controlPoints = {
+        {glm::vec3(-0.5f, 0.0f, 1.0f),glm::vec3(0.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.0f, 0.5f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.5f, 0.5f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.5f, 0.0f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)}
     };
     BezierCurve bezierCurve(controlPoints);
 
-    std::vector<glm::vec3> curvePoints = bezierCurve.discretizeUniformParametric(20);
+    std::vector<Vertex> curvePoints = bezierCurve.discretizeUniformParametric(20);
     std::cout << "curve points" << curvePoints.size() << std::endl;
-    std::vector<float> vertices;
+    std::vector<Vertex> vertices;
     for (const auto &point : curvePoints) {
-        vertices.push_back(point.x);
-        vertices.push_back(point.y);
-        vertices.push_back(point.z);
+        vertices.push_back({point});
     }
-    glm::vec3 lastPoint = curvePoints.back();
-    std::cout << "last point" << lastPoint.x << lastPoint.y << lastPoint.z << std::endl;
     std::cout << "curve points" << curvePoints.size() << std::endl;
+    std::cout << "Vertices:" << std::endl;
 
-    Mesh curveMesh(vertices.data(), vertices.size());
+    Mesh curveMesh=Mesh(vertices);
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);

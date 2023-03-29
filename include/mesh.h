@@ -1,11 +1,13 @@
 #pragma once
 
+#include <vector>
 #include <glad/glad.h>
+#include <vertex.h>
 
 class Mesh
 {
 public:
-    Mesh(float* vertices, unsigned int numVertices);
+    Mesh( std::vector<Vertex> vertices);
     ~Mesh();
     void draw() const;
 

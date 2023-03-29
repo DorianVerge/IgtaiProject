@@ -1,17 +1,18 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <vertex.h>
 #include <vector>
 class BezierCurve {
 public:
-    BezierCurve(const std::vector<glm::vec3>& controlPoints);
+    BezierCurve(const std::vector<Vertex>& controlPoints);
 
-    glm::vec3 evaluate(float t) const;
+    Vertex evaluate(float t) const;
 
-    std::vector<glm::vec3> discretizeUniformParametric(int numSegments) const;
+    std::vector<Vertex> discretizeUniformParametric(int numSegments) const;
 
 private:
-    std::vector<glm::vec3> controlPoints;
+    std::vector<Vertex> controlPoints;
 
-    glm::vec3 deCasteljau(const std::vector<glm::vec3>& points, float t) const;
+    Vertex deCasteljau(const std::vector<Vertex>& points, float t) const;
 };

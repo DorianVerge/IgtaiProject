@@ -252,6 +252,7 @@ CMakeFiles/main.dir/src/bezierCurve.cpp.o: ../src/bezierCurve.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
+  ../include/vertex.h \
   /usr/include/c++/11/vector \
   /usr/include/c++/11/bits/allocator.h \
   /usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h \
@@ -646,7 +647,12 @@ CMakeFiles/main.dir/src/main.cpp.o: ../src/main.cpp \
   ../include/window.h \
   ../include/shader.h \
   ../include/mesh.h \
-  ../include/bezierCurve.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  ../include/vertex.h \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/c++/11/cmath \
@@ -822,11 +828,7 @@ CMakeFiles/main.dir/src/main.cpp.o: ../src/main.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
+  ../include/bezierCurve.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/ctime \
@@ -1037,7 +1039,12 @@ CMakeFiles/main.dir/src/mesh.cpp.o: ../src/mesh.cpp \
   ../include/window.h \
   ../include/shader.h \
   ../include/mesh.h \
-  ../include/bezierCurve.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  ../include/vertex.h \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/c++/11/cmath \
@@ -1213,11 +1220,7 @@ CMakeFiles/main.dir/src/mesh.cpp.o: ../src/mesh.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
+  ../include/bezierCurve.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/ctime \
@@ -1428,7 +1431,12 @@ CMakeFiles/main.dir/src/shader.cpp.o: ../src/shader.cpp \
   ../include/window.h \
   ../include/shader.h \
   ../include/mesh.h \
-  ../include/bezierCurve.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  ../include/vertex.h \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/c++/11/cmath \
@@ -1604,11 +1612,7 @@ CMakeFiles/main.dir/src/shader.cpp.o: ../src/shader.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
+  ../include/bezierCurve.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/ctime \
@@ -1819,7 +1823,12 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
   ../include/window.h \
   ../include/shader.h \
   ../include/mesh.h \
-  ../include/bezierCurve.h \
+  /usr/include/c++/11/vector \
+  /usr/include/c++/11/bits/stl_uninitialized.h \
+  /usr/include/c++/11/bits/stl_vector.h \
+  /usr/include/c++/11/bits/stl_bvector.h \
+  /usr/include/c++/11/bits/vector.tcc \
+  ../include/vertex.h \
   /usr/include/glm/glm.hpp \
   /usr/include/glm/detail/_fixes.hpp \
   /usr/include/c++/11/cmath \
@@ -1995,11 +2004,7 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
   /usr/include/glm/detail/type_half.inl \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
-  /usr/include/c++/11/vector \
-  /usr/include/c++/11/bits/stl_uninitialized.h \
-  /usr/include/c++/11/bits/stl_vector.h \
-  /usr/include/c++/11/bits/stl_bvector.h \
-  /usr/include/c++/11/bits/vector.tcc \
+  ../include/bezierCurve.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/ctime \
@@ -2319,8 +2324,6 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
 
 /usr/include/x86_64-linux-gnu/bits/thread-shared-types.h:
 
-/usr/include/c++/11/ext/new_allocator.h:
-
 /usr/include/c++/11/bits/stl_relops.h:
 
 /usr/include/limits.h:
@@ -2334,6 +2337,10 @@ CMakeFiles/main.dir/src/window.cpp.o: ../src/window.cpp \
 /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h:
 
 /usr/include/glm/ext/matrix_double4x2.hpp:
+
+/usr/include/c++/11/ext/new_allocator.h:
+
+../include/vertex.h:
 
 /usr/include/glm/mat4x4.hpp:
 
