@@ -18,10 +18,10 @@ int main() {
     Shader shader("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
 
     std::vector<Vertex> controlPoints = {
-        {glm::vec3(-0.5f, 0.0f, 1.0f),glm::vec3(0.0f, 0.0f, 0.0f)},
-        {glm::vec3(0.0f, 0.5f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)},
-        {glm::vec3(0.5f, 0.5f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)},
-        {glm::vec3(0.5f, 0.0f, 0.5f),glm::vec3(0.0f, 0.0f, 0.0f)}
+        {glm::vec3(-0.5f, 0.0f, 0.0f),glm::vec3(1.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.0f, 0.5f, 0.0f),glm::vec3(0.0f, 1.0f, 0.0f)},
+        {glm::vec3(0.5f, 0.5f, 0.0f),glm::vec3(0.0f, 0.0f, 1.0f)},
+        {glm::vec3(0.5f, 0.0f, 0.0f),glm::vec3(1.0f, 0.0f, 0.0f)}
     };
     BezierCurve bezierCurve(controlPoints);
 
@@ -33,6 +33,9 @@ int main() {
     }
     std::cout << "curve points" << curvePoints.size() << std::endl;
     std::cout << "Vertices:" << std::endl;
+    for (const auto &vertex : vertices) {
+        std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
+    }
 
     Mesh curveMesh=Mesh(vertices);
 

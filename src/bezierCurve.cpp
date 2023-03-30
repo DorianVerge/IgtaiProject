@@ -25,7 +25,7 @@ Vertex BezierCurve::deCasteljau(const std::vector<Vertex>& points, float t) cons
     std::vector<Vertex> newPoints;
     for (size_t i = 0; i < points.size() - 1; ++i) {
         ///std::cout << "points"  <<points[i+1].x << points[i+1].y << std::endl;
-        newPoints.push_back(glm::mix(points[i].position, points[i + 1].position, t));
+        newPoints.push_back({glm::mix(points[i].position, points[i + 1].position, t),glm::mix(points[i].color, points[i + 1].color, t)});
     }
 
     return deCasteljau(newPoints, t);
