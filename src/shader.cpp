@@ -82,3 +82,8 @@ unsigned int Shader::getProgram() const
 {
     return shaderProgram;
 }
+
+void Shader::setMat4(const std::string& name, const glm::mat4& matrix) const
+{
+    glUniformMatrix4fv(glGetUniformLocation(shaderProgram, name.c_str()), 1, GL_FALSE, glm::value_ptr(matrix));
+}

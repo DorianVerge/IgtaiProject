@@ -18,10 +18,10 @@ int main() {
     Shader shader("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
 
     std::vector<Vertex> controlPoints = {
-        {glm::vec3(-0.5f, 0.0f, 0.0f),glm::vec3(1.0f, 0.0f, 0.0f)},
-        {glm::vec3(0.0f, 0.5f, 0.0f),glm::vec3(0.0f, 1.0f, 0.0f)},
-        {glm::vec3(0.5f, 0.5f, 0.0f),glm::vec3(0.0f, 0.0f, 1.0f)},
-        {glm::vec3(0.5f, 0.0f, 0.0f),glm::vec3(1.0f, 0.0f, 0.0f)}
+    {glm::vec3(-0.5f, -0.5f, -1.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
+    {glm::vec3(0.5f, -0.5f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
+    {glm::vec3(0.0f, 0.5f, -1.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
+    {glm::vec3(-0.5f, -0.5f, 1.0f), glm::vec3(1.0f, 0.0f, 0.0f)}
     };
     BezierCurve bezierCurve(controlPoints);
 
@@ -34,14 +34,21 @@ int main() {
     std::cout << "curve points" << curvePoints.size() << std::endl;
     std::cout << "Vertices:" << std::endl;
     for (const auto &vertex : vertices) {
-        std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
+        std::cout << vertex.color.x << " " << vertex.color.y << " " << vertex.color.z << std::endl;
     }
-
+    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     Mesh curveMesh=Mesh(vertices);
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
+        glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+        glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f))*rotationMatrix;;
+        glm::mat4 model = glm::mat4(1.0f);
+
+        shader.setMat4("projection", projection);
+        shader.setMat4("view", view);
+        shader.setMat4("model", model);
         shader.use();
         glLineWidth(3.0f);
         curveMesh.draw();
