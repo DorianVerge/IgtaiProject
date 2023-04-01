@@ -2,7 +2,8 @@
 
 void processInput(GLFWwindow *window);
 
-int main() {
+int main(int argc, char *argv[]) {
+    std::cout << argc << argv[0]<< argv[1] << std::endl;
     if (!glfwInit()) {
         std::cout << "Failed to initialize GLFW" << std::endl;
         return -1;
@@ -36,12 +37,18 @@ int main() {
     for (const auto &vertex : vertices) {
         std::cout << vertex.color.x << " " << vertex.color.y << " " << vertex.color.z << std::endl;
     }
-    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    static float angle = 0.0f;
+    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
     Mesh curveMesh=Mesh(vertices);
+    Mesh controlPolygonMesh = Mesh(controlPoints);
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
 
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
+        angle+=0.1f;
+        rotationMatrix=glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
         glm::mat4 projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
         glm::mat4 view = glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f))*rotationMatrix;;
         glm::mat4 model = glm::mat4(1.0f);
@@ -52,6 +59,7 @@ int main() {
         shader.use();
         glLineWidth(3.0f);
         curveMesh.draw();
+        controlPolygonMesh.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
