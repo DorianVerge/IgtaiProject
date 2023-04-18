@@ -7,10 +7,13 @@
 class Mesh
 {
 public:
-    Mesh( std::vector<Vertex> vertices);
+    Mesh() = default;
+    Mesh( std::vector<Vertex> vertices,GLenum drawMode = GL_LINE_STRIP);
     ~Mesh();
     void draw() const;
+    unsigned int numVertices;
 
 private:
-    unsigned int VAO, VBO,numVertices;
+    GLenum drawMode;
+    unsigned int VAO, VBO;
 };

@@ -153,6 +153,30 @@ src/bezierCurve.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierCurve.cpp.s
 .PHONY : src/bezierCurve.cpp.s
 
+src/bezierSurface.o: src/bezierSurface.cpp.o
+.PHONY : src/bezierSurface.o
+
+# target to build an object file
+src/bezierSurface.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierSurface.cpp.o
+.PHONY : src/bezierSurface.cpp.o
+
+src/bezierSurface.i: src/bezierSurface.cpp.i
+.PHONY : src/bezierSurface.i
+
+# target to preprocess a source file
+src/bezierSurface.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierSurface.cpp.i
+.PHONY : src/bezierSurface.cpp.i
+
+src/bezierSurface.s: src/bezierSurface.cpp.s
+.PHONY : src/bezierSurface.s
+
+# target to generate assembly for a file
+src/bezierSurface.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierSurface.cpp.s
+.PHONY : src/bezierSurface.cpp.s
+
 src/glad.o: src/glad.c.o
 .PHONY : src/glad.o
 
@@ -285,6 +309,9 @@ help:
 	@echo "... src/bezierCurve.o"
 	@echo "... src/bezierCurve.i"
 	@echo "... src/bezierCurve.s"
+	@echo "... src/bezierSurface.o"
+	@echo "... src/bezierSurface.i"
+	@echo "... src/bezierSurface.s"
 	@echo "... src/glad.o"
 	@echo "... src/glad.i"
 	@echo "... src/glad.s"

@@ -1,6 +1,6 @@
 #include "defines.h"
 
-Mesh::Mesh(std::vector<Vertex> vertices)
+Mesh::Mesh(std::vector<Vertex> vertices,GLenum drawMode) : drawMode(drawMode)
 {
     this->numVertices=vertices.size();
     std::cout << "numVertices" << numVertices << std::endl;
@@ -33,6 +33,6 @@ Mesh::~Mesh()
 void Mesh::draw() const
 {
     glBindVertexArray(VAO);
-    glDrawArrays(GL_LINE_STRIP, 0, numVertices);
+    glDrawArrays(drawMode, 0, numVertices);
     glBindVertexArray(0);
 }
