@@ -717,9 +717,10 @@ CMakeFiles/main.dir/src/bezierSurface.cpp.o: ../src/bezierSurface.cpp \
   /usr/include/glm/integer.hpp \
   /usr/include/glm/detail/func_integer.inl \
   ../include/bezierCurve.h \
-  ../include/defines.h \
+  ../include/mesh.h \
   ../include/glad/glad.h \
   ../include/KHR/khrplatform.h \
+  ../include/defines.h \
   /usr/include/GLFW/glfw3.h \
   /usr/include/c++/11/iostream \
   /usr/include/c++/11/ostream \
@@ -867,7 +868,6 @@ CMakeFiles/main.dir/src/bezierSurface.cpp.o: ../src/bezierSurface.cpp \
   /usr/include/string.h \
   /usr/include/strings.h \
   /usr/include/glm/gtc/type_ptr.inl \
-  ../include/mesh.h \
   /usr/include/c++/11/chrono \
   /usr/include/c++/11/ratio \
   /usr/include/c++/11/ctime \

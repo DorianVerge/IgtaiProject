@@ -30,3 +30,21 @@ Vertex BezierCurve::deCasteljau(const std::vector<Vertex>& points, float t) cons
 
     return deCasteljau(newPoints, t);
 }
+
+Vertex BezierCurve::evaluateDerivative(float t) const {
+    if (controlPoints.size() <= 1) {
+        return Vertex{glm::vec3(0.0f), glm::vec3(0.0f), glm::vec3(0.0f)};
+    }
+
+    std::vector<Vertex> reducedControlPoints;
+    for (size_t i = 0; i < controlPoints.size() - 1; ++i) {
+        reducedControlPoints.push_back({
+            controlPoints[i + 1].position - controlPoints[i].position,
+            controlPoints[i + 1].color - controlPoints[i].color,
+            glm::vec3(0.0f)
+        });
+    }
+
+    BezierCurve derivativeCurve(reducedControlPoints);
+    return derivativeCurve.evaluate(t);
+}

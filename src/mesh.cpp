@@ -3,7 +3,7 @@
 Mesh::Mesh(std::vector<Vertex> vertices,GLenum drawMode) : drawMode(drawMode)
 {
     this->numVertices=vertices.size();
-    std::cout << "numVertices" << numVertices << std::endl;
+    //std::cout << "numVertices" << numVertices << std::endl;
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
     

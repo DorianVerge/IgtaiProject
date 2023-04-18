@@ -19,6 +19,8 @@ Window::Window()  {
 
     m_width = (mode->width * 4 / 10);
     m_height = (mode->height * 5 / 10);
+
+    m_aspectRatio = static_cast<float>(m_width) / m_height;
     
     // glfw: initialize and configure
     glfwWindowHint(GLFW_RED_BITS, mode->redBits);
@@ -90,6 +92,10 @@ unsigned int Window::getHeight(){
 unsigned int Window::getWidth(){
     return m_width;
 }
+
+float Window::getAspectRatio() { 
+    return m_aspectRatio; 
+    }
 void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 {
     // make sure the viewport matches the new window dimensions; note that width and 
@@ -99,7 +105,9 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 
 void window_size_callback(GLFWwindow* window, int width, int height)
 {
-    float aspectRatio = 800.0f / 600.0f; // 4:3 aspect ratio
+    Window *winObj = reinterpret_cast<Window*>(glfwGetWindowUserPointer(window));
+    float aspectRatio = winObj->getAspectRatio(); // Get aspect ratio from the Window object
+
     int newWidth = width;
     int newHeight = static_cast<int>(width / aspectRatio);
 
@@ -114,6 +122,8 @@ void window_size_callback(GLFWwindow* window, int width, int height)
 
     glViewport(xOffset, yOffset, newWidth, newHeight);
 }
+
+
 
     
 

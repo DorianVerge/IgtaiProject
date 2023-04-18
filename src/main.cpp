@@ -15,6 +15,8 @@ bool drawBezierCurve = false;
 bool STOP = false;
 float zoomLevel = 45.0f;
 float zRotationAngle = 0.0f;
+int u=20;
+int v=20;
 
 int main(int argc, char *argv[]) {
     parseCommandLineArguments(argc, argv);
@@ -27,6 +29,8 @@ int main(int argc, char *argv[]) {
     Window myWindow;
     GLFWwindow *window = myWindow.getWindow();
 
+    glfwSetWindowUserPointer(window, &myWindow);
+
     if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
@@ -37,16 +41,22 @@ int main(int argc, char *argv[]) {
     std::vector<std::vector<Vertex>> controlPointsGrid = createControlGrid();
 
     BezierCurve bezierCurve(controlPoints);
-    std::vector<Vertex> curvePoints = bezierCurve.discretizeUniformParametric(20);
+    std::vector<Vertex> curvePoints = bezierCurve.discretizeUniformParametric(u);
     Mesh curveMesh(curvePoints);
     Mesh controlPolygonMesh(controlPoints);
 
     BezierSurface bezierSurface(controlPointsGrid);
-    std::vector<std::vector<Vertex>> surfacePoints = bezierSurface.discretizeUniformParametric(20,20);
+    std::vector<std::vector<Vertex>> surfacePoints = bezierSurface.discretizeUniformParametric(u,v);
 
     std::vector<Vertex> surfaceVertices= createVertices(surfacePoints);
 
     Mesh surfaceMesh(surfaceVertices, GL_TRIANGLE_STRIP);
+    Mesh NormalMesh= bezierSurface.createNormalVisualizerMesh(surfacePoints, 0.1f); 
+            for (const auto &raw : surfacePoints) {
+            for (const auto &vertex : raw) {
+                std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
+            }
+    }
  
     static float angle = 0.0f;
     glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -76,6 +86,8 @@ int main(int argc, char *argv[]) {
             controlPolygonMesh.draw();
         if (1)
             surfaceMesh.draw();
+        if (0)
+            NormalMesh.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
@@ -146,6 +158,12 @@ void parseCommandLineArguments(int argc, char *argv[]) {
         if (strcmp(argv[i], "-b") == 0)
         {
             drawBezierCurve = true;
+        }
+        if (strcmp(argv[i], "-u") == 0 && i + 1 < argc) {
+            u = std::stoi(argv[i + 1]);
+        }
+        if (strcmp(argv[i], "-v") == 0 && i + 1 < argc) {
+            v = std::stoi(argv[i + 1]);
         }
     }
 }

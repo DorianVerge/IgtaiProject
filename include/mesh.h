@@ -11,9 +11,9 @@ public:
     Mesh( std::vector<Vertex> vertices,GLenum drawMode = GL_LINE_STRIP);
     ~Mesh();
     void draw() const;
-    unsigned int numVertices;
 
 private:
+    unsigned int numVertices;
     GLenum drawMode;
     unsigned int VAO, VBO;
 };

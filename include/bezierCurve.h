@@ -10,6 +10,7 @@ public:
     Vertex evaluate(float t) const;
 
     std::vector<Vertex> discretizeUniformParametric(int numSegments) const;
+    Vertex evaluateDerivative(float t) const;
 
 private:
     std::vector<Vertex> controlPoints;
