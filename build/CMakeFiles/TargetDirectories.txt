@@ -1,3 +1,0 @@
-/home/dodo/workplace/IgtaiProject/build/CMakeFiles/main.dir
-/home/dodo/workplace/IgtaiProject/build/CMakeFiles/edit_cache.dir
-/home/dodo/workplace/IgtaiProject/build/CMakeFiles/rebuild_cache.dir

@@ -6,6 +6,7 @@
 #include "shader.h"
 #include "mesh.h"
 #include "bezierCurve.h"
+#include "bezierSurface.h"
 #include <chrono>
 #include <thread>
 #include <fstream>

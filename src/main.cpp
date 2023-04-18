@@ -1,12 +1,25 @@
 #include "defines.h"
 
 void processInput(GLFWwindow *window);
+bool drawControlPolygon = false;
+bool drawBezierCurve = false;
 
 int main(int argc, char *argv[]) {
     std::cout << argc << argv[0]<< argv[1] << std::endl;
     if (!glfwInit()) {
         std::cout << "Failed to initialize GLFW" << std::endl;
         return -1;
+    }
+    for (int i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-p") == 0)
+        {
+            drawControlPolygon = true;
+        }
+        if (strcmp(argv[i], "-b") == 0)
+        {
+            drawBezierCurve = true;
+        }
     }
     Window myWindow;
     GLFWwindow *window = myWindow.getWindow();
@@ -58,8 +71,10 @@ int main(int argc, char *argv[]) {
         shader.setMat4("model", model);
         shader.use();
         glLineWidth(3.0f);
-        curveMesh.draw();
-        controlPolygonMesh.draw();
+        if (drawBezierCurve)
+            curveMesh.draw();
+        if (drawControlPolygon)
+            controlPolygonMesh.draw();
 
         glfwSwapBuffers(window);
         glfwPollEvents();
