@@ -3,6 +3,7 @@
 
 void processInput(GLFWwindow *window);
 void parseCommandLineArguments(int argc, char *argv[]);
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset);
 std::vector<Vertex> createControlPoints();
 std::vector<std::vector<Vertex>> createControlGrid();
 std::vector<Vertex> createVertices(std::vector<std::vector<Vertex>> controlPointsGrid);
@@ -12,11 +13,16 @@ std::vector<Vertex> createVertices(std::vector<std::vector<Vertex>> controlPoint
 
 bool drawControlPolygon = false;
 bool drawBezierCurve = false;
-bool STOP = false;
+bool drawBezierSurface = false;
+bool drawNormal = false;
+bool drawParametric = false;
+bool STOP = true;
 float zoomLevel = 45.0f;
 float zRotationAngle = 0.0f;
+static float angle = 0.0f;
 int u=20;
 int v=20;
+Camera camera(glm::vec3(0.0f, 0.0f, 5.0f), glm::vec3(0.0f, 1.0f, 0.0f), -90.0f, 0.0f, glm::vec3(0.0f));
 
 int main(int argc, char *argv[]) {
     parseCommandLineArguments(argc, argv);
@@ -36,6 +42,9 @@ int main(int argc, char *argv[]) {
         return -1;
     }
 
+    glDisable(GL_BLEND);
+    glDisable(GL_CULL_FACE);
+
     Shader shader("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
     std::vector<Vertex> controlPoints= createControlPoints();
     std::vector<std::vector<Vertex>> controlPointsGrid = createControlGrid();
@@ -48,50 +57,54 @@ int main(int argc, char *argv[]) {
     BezierSurface bezierSurface(controlPointsGrid);
     std::vector<std::vector<Vertex>> surfacePoints = bezierSurface.discretizeUniformParametric(u,v);
 
-    std::vector<Vertex> surfaceVertices= createVertices(surfacePoints);
-
-    Mesh surfaceMesh(surfaceVertices, GL_TRIANGLE_STRIP);
+    SurfaceMesh surfaceMesh(surfacePoints,GL_TRIANGLES);
+    SurfaceMesh paramMesh(surfacePoints);
     Mesh NormalMesh= bezierSurface.createNormalVisualizerMesh(surfacePoints, 0.1f); 
-            for (const auto &raw : surfacePoints) {
-            for (const auto &vertex : raw) {
-                std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << std::endl;
-            }
+
+            for (const auto &vertex : surfacePoints) {
+                std::cout << vertex[0].normal.x << " " << vertex[0].normal.y << " " << vertex[0].normal.z << std::endl;
+            
     }
  
-    static float angle = 0.0f;
-    glm::mat4 rotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
 
-    while (!glfwWindowShouldClose(window)) {
-        processInput(window);
+glfwSetScrollCallback(window, scroll_callback);
+float deltaTime = 0.0f;
+float lastFrame = 0.0f;
 
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        if (!STOP){
-            angle+=0.1f;
-            rotationMatrix=glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(0.0f, 1.0f, 0.0f));
-        }
-        glm::mat4 zRotationMatrix = glm::rotate(glm::mat4(1.0f), glm::radians(zRotationAngle), glm::vec3(0.0f, 0.0f, 1.0f));
-        glm::mat4 projection = glm::perspective(glm::radians(zoomLevel), 800.0f / 600.0f, 0.1f, 100.0f);
-        glm::mat4 view = zRotationMatrix * glm::lookAt(glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f))*rotationMatrix;;
-        glm::mat4 model = glm::mat4(1.0f);
+while (!glfwWindowShouldClose(window)) {
+    processInput(window);
 
-        shader.setMat4("projection", projection);
-        shader.setMat4("view", view);
-        shader.setMat4("model", model);
-        shader.use();
-        glLineWidth(3.0f);
-        if (drawBezierCurve)
-            curveMesh.draw();
-        if (drawControlPolygon)
-            controlPolygonMesh.draw();
-        if (1)
-            surfaceMesh.draw();
-        if (0)
-            NormalMesh.draw();
+    float currentFrame = glfwGetTime();
+    deltaTime = currentFrame - lastFrame;
+    lastFrame = currentFrame;
 
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
+    camera.processKeyboardInput(window, deltaTime);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), myWindow.getAspectRatio(), 0.1f, 100.0f);
+    glm::mat4 view = camera.getViewMatrix();
+    glm::mat4 model = glm::mat4(1.0f);
+
+    shader.setMat4("projection", projection);
+    shader.setMat4("view", view);
+    shader.setMat4("model", model);
+    shader.use();
+    glLineWidth(3.0f);
+    if (drawBezierCurve)
+        curveMesh.draw();
+    if (drawControlPolygon)
+        controlPolygonMesh.draw();
+    if (drawBezierSurface)
+        surfaceMesh.draw();
+    if (drawNormal)
+        NormalMesh.draw();
+    if (drawParametric)
+        paramMesh.draw();
+
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
     
     
     std::cout << "curve points"  << std::endl;
@@ -111,23 +124,26 @@ std::vector<Vertex> createControlPoints() {
 }
 
 std::vector<std::vector<Vertex>> createControlGrid(){
-    std::vector<std::vector<Vertex>> controlPointsGrid = {
+std::vector<std::vector<Vertex>> controlPointsGrid = {
     {
-        {glm::vec3(-1.0f, -1.0f, -1.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
-        {glm::vec3(0.0f, -1.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
-        {glm::vec3(1.0f, -1.0f, -1.0f), glm::vec3(0.0f, 0.0f, 1.0f)}
+        {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
+        {glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
+        {glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
+        {glm::vec3(3.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
     },
     {
-        {glm::vec3(-1.0f, 0.0f, 1.0f), glm::vec3(1.0f, 1.0f, 0.0f)},
-        {glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f, 1.0f, 1.0f)},
-        {glm::vec3(1.0f, 0.0f, 1.0f), glm::vec3(1.0f, 0.0f, 1.0f)}
+        {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
+        {glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
+        {glm::vec3(0.0f, 3.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
     },
     {
-        {glm::vec3(-1.0f, 1.0f, -1.0f), glm::vec3(1.0f, 0.5f, 0.0f)},
-        {glm::vec3(0.0f, 1.0f, 1.0f), glm::vec3(0.0f, 0.5f, 1.0f)},
-        {glm::vec3(1.0f, 1.0f, -1.0f), glm::vec3(0.5f, 0.0f, 1.0f)}
+        {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
+        {glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.5f)},
+        {glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
+        {glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
     }
-    };
+};
     return controlPointsGrid;
 }
 
@@ -165,20 +181,23 @@ void parseCommandLineArguments(int argc, char *argv[]) {
         if (strcmp(argv[i], "-v") == 0 && i + 1 < argc) {
             v = std::stoi(argv[i + 1]);
         }
+        if (strcmp(argv[i], "-s") == 0) {
+            drawBezierSurface = true;
+        }
+        if (strcmp(argv[i], "-n") == 0) {
+            drawNormal = true;
+        }
+        if (strcmp(argv[i], "-t") == 0) {
+            drawParametric = true;
+        }
     }
 }
 
 void processInput(GLFWwindow *window) {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-        STOP=!STOP;
-    if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
-        zoomLevel -= 0.3f;
-    if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-        zoomLevel += 0.3f;  
-    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
-        zRotationAngle -= 0.3f;
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-        zRotationAngle += 0.3f;       
+        glfwSetWindowShouldClose(window, true);    
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset) {
+    camera.processMouseScroll(yoffset);
 }

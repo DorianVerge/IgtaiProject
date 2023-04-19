@@ -11,7 +11,7 @@ endif()
 find_package(glfw3 3.3 REQUIRED)
 
 # Create an executable
-add_executable(main src/main.cpp src/glad.c src/window.cpp src/shader.cpp src/mesh.cpp src/bezierCurve.cpp src/bezierSurface.cpp )
+add_executable(main src/main.cpp src/glad.c src/window.cpp src/shader.cpp src/mesh.cpp src/bezierCurve.cpp src/bezierSurface.cpp src/camera.cpp src/surfaceMesh.cpp )
 
 # Link the executable to the libraries
 target_link_libraries(main glfw )

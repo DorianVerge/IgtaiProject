@@ -27,6 +27,7 @@ std::vector<std::vector<Vertex>> BezierSurface::discretizeUniformParametric(int 
             Vertex partialV = evaluatePartialV(u, v);
 
             point.normal = glm::normalize(glm::cross(partialU.position, partialV.position));
+            point.texCoords = glm::vec2(u, v);
             row.push_back(point);
         }
         pointsGrid.push_back(row);

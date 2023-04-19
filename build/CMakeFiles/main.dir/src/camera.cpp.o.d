@@ -1,5 +1,5 @@
-CMakeFiles/main.dir/src/main.cpp.o: \
- /home/dodo/workplace/IgtaiProject-1/src/main.cpp \
+CMakeFiles/main.dir/src/camera.cpp.o: \
+ /home/dodo/workplace/IgtaiProject-1/src/camera.cpp \
  /usr/include/stdc-predef.h \
  /home/dodo/workplace/IgtaiProject-1/include/defines.h \
  /home/dodo/workplace/IgtaiProject-1/include/glad/glad.h \

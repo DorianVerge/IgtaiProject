@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/dodo/workplace/IgtaiProject
+CMAKE_SOURCE_DIR = /home/dodo/workplace/IgtaiProject-1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/dodo/workplace/IgtaiProject/build
+CMAKE_BINARY_DIR = /home/dodo/workplace/IgtaiProject-1/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/workplace/IgtaiProject/build/CMakeFiles /home/dodo/workplace/IgtaiProject/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/workplace/IgtaiProject-1/build/CMakeFiles /home/dodo/workplace/IgtaiProject-1/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/workplace/IgtaiProject/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/dodo/workplace/IgtaiProject-1/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -176,6 +176,30 @@ src/bezierSurface.s: src/bezierSurface.cpp.s
 src/bezierSurface.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/bezierSurface.cpp.s
 .PHONY : src/bezierSurface.cpp.s
+
+src/camera.o: src/camera.cpp.o
+.PHONY : src/camera.o
+
+# target to build an object file
+src/camera.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cpp.o
+.PHONY : src/camera.cpp.o
+
+src/camera.i: src/camera.cpp.i
+.PHONY : src/camera.i
+
+# target to preprocess a source file
+src/camera.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cpp.i
+.PHONY : src/camera.cpp.i
+
+src/camera.s: src/camera.cpp.s
+.PHONY : src/camera.s
+
+# target to generate assembly for a file
+src/camera.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/camera.cpp.s
+.PHONY : src/camera.cpp.s
 
 src/glad.o: src/glad.c.o
 .PHONY : src/glad.o
@@ -273,6 +297,30 @@ src/shader.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/shader.cpp.s
 .PHONY : src/shader.cpp.s
 
+src/surfaceMesh.o: src/surfaceMesh.cpp.o
+.PHONY : src/surfaceMesh.o
+
+# target to build an object file
+src/surfaceMesh.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/surfaceMesh.cpp.o
+.PHONY : src/surfaceMesh.cpp.o
+
+src/surfaceMesh.i: src/surfaceMesh.cpp.i
+.PHONY : src/surfaceMesh.i
+
+# target to preprocess a source file
+src/surfaceMesh.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/surfaceMesh.cpp.i
+.PHONY : src/surfaceMesh.cpp.i
+
+src/surfaceMesh.s: src/surfaceMesh.cpp.s
+.PHONY : src/surfaceMesh.s
+
+# target to generate assembly for a file
+src/surfaceMesh.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/surfaceMesh.cpp.s
+.PHONY : src/surfaceMesh.cpp.s
+
 src/window.o: src/window.cpp.o
 .PHONY : src/window.o
 
@@ -312,6 +360,9 @@ help:
 	@echo "... src/bezierSurface.o"
 	@echo "... src/bezierSurface.i"
 	@echo "... src/bezierSurface.s"
+	@echo "... src/camera.o"
+	@echo "... src/camera.i"
+	@echo "... src/camera.s"
 	@echo "... src/glad.o"
 	@echo "... src/glad.i"
 	@echo "... src/glad.s"
@@ -324,6 +375,9 @@ help:
 	@echo "... src/shader.o"
 	@echo "... src/shader.i"
 	@echo "... src/shader.s"
+	@echo "... src/surfaceMesh.o"
+	@echo "... src/surfaceMesh.i"
+	@echo "... src/surfaceMesh.s"
 	@echo "... src/window.o"
 	@echo "... src/window.i"
 	@echo "... src/window.s"

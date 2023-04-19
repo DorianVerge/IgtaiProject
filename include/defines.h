@@ -7,6 +7,8 @@
 #include "mesh.h"
 #include "bezierCurve.h"
 #include "bezierSurface.h"
+#include "surfaceMesh.h"
+#include "camera.h"
 #include <chrono>
 #include <thread>
 #include <fstream>
