@@ -1,9 +1,9 @@
 CMakeFiles/main.dir/src/camera.cpp.o: \
- /home/dodo/workplace/IgtaiProject-1/src/camera.cpp \
+ /home/dodo/workplace/IgtaiProject-2/src/camera.cpp \
  /usr/include/stdc-predef.h \
- /home/dodo/workplace/IgtaiProject-1/include/defines.h \
- /home/dodo/workplace/IgtaiProject-1/include/glad/glad.h \
- /home/dodo/workplace/IgtaiProject-1/include/KHR/khrplatform.h \
+ /home/dodo/workplace/IgtaiProject-2/include/defines.h \
+ /home/dodo/workplace/IgtaiProject-2/include/glad/glad.h \
+ /home/dodo/workplace/IgtaiProject-2/include/KHR/khrplatform.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -151,8 +151,8 @@ CMakeFiles/main.dir/src/camera.cpp.o: \
  /usr/include/c++/11/bits/basic_ios.tcc \
  /usr/include/c++/11/bits/ostream.tcc /usr/include/c++/11/istream \
  /usr/include/c++/11/bits/istream.tcc \
- /home/dodo/workplace/IgtaiProject-1/include/window.h \
- /home/dodo/workplace/IgtaiProject-1/include/shader.h \
+ /home/dodo/workplace/IgtaiProject-2/include/window.h \
+ /home/dodo/workplace/IgtaiProject-2/include/shader.h \
  /usr/include/glm/glm.hpp /usr/include/glm/detail/_fixes.hpp \
  /usr/include/c++/11/cmath /usr/include/math.h \
  /usr/include/x86_64-linux-gnu/bits/math-vector.h \
@@ -346,16 +346,16 @@ CMakeFiles/main.dir/src/camera.cpp.o: \
  /usr/include/glm/ext/vector_uint1_sized.hpp /usr/include/c++/11/cstring \
  /usr/include/string.h /usr/include/strings.h \
  /usr/include/glm/gtc/type_ptr.inl \
- /home/dodo/workplace/IgtaiProject-1/include/mesh.h \
+ /home/dodo/workplace/IgtaiProject-2/include/mesh.h \
  /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_uninitialized.h \
  /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
  /usr/include/c++/11/bits/vector.tcc \
- /home/dodo/workplace/IgtaiProject-1/include/vertex.h \
- /home/dodo/workplace/IgtaiProject-1/include/bezierCurve.h \
- /home/dodo/workplace/IgtaiProject-1/include/bezierSurface.h \
- /home/dodo/workplace/IgtaiProject-1/include/surfaceMesh.h \
- /home/dodo/workplace/IgtaiProject-1/include/camera.h \
+ /home/dodo/workplace/IgtaiProject-2/include/vertex.h \
+ /home/dodo/workplace/IgtaiProject-2/include/bezierCurve.h \
+ /home/dodo/workplace/IgtaiProject-2/include/bezierSurface.h \
+ /home/dodo/workplace/IgtaiProject-2/include/surfaceMesh.h \
+ /home/dodo/workplace/IgtaiProject-2/include/camera.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
