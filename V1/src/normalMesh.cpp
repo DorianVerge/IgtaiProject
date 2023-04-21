@@ -1,7 +1,7 @@
-#include "surfaceMesh.h"
+#include "normalMesh.h"
 #include "../include/defines.h"
 
-SurfaceMesh::SurfaceMesh(const std::vector<std::vector<Vertex>>& verticesGrid, std::vector<Light*> lights,Camera* camera, GLenum drawMode)
+NormalMesh::NormalMesh(const std::vector<std::vector<Vertex>>& verticesGrid, std::vector<Light*> lights,Camera* camera, GLenum drawMode)
     : m_vertices(createVertices(verticesGrid)),
       m_indices(createIndices(verticesGrid)),
       drawMode(drawMode),
@@ -35,7 +35,7 @@ SurfaceMesh::SurfaceMesh(const std::vector<std::vector<Vertex>>& verticesGrid, s
     //updateNormals();
 }
 
-std::vector<Vertex> SurfaceMesh::createVertices(const std::vector<std::vector<Vertex>>& verticesGrid) {
+std::vector<Vertex> NormalMesh::createVertices(const std::vector<std::vector<Vertex>>& verticesGrid) {
     std::vector<Vertex> vertices;
     int numRows = verticesGrid.size();
     int numCols = verticesGrid[0].size();
@@ -48,7 +48,7 @@ std::vector<Vertex> SurfaceMesh::createVertices(const std::vector<std::vector<Ve
     return vertices;
 }
 
-std::vector<GLuint> SurfaceMesh::createIndices(const std::vector<std::vector<Vertex>>& verticesGrid) {
+std::vector<GLuint> NormalMesh::createIndices(const std::vector<std::vector<Vertex>>& verticesGrid) {
     std::vector<GLuint> indices;
     int numRows = verticesGrid.size();
     int numCols = verticesGrid[0].size();
@@ -67,7 +67,7 @@ std::vector<GLuint> SurfaceMesh::createIndices(const std::vector<std::vector<Ver
     return indices;
 }
 
-Mesh SurfaceMesh::createNormalVisualizerMesh(const std::vector<std::vector<Vertex>>& surfaceVertices, float normalLength) {
+Mesh NormalMesh::createNormalVisualizerMesh(const std::vector<std::vector<Vertex>>& surfaceVertices, float normalLength) {
     std::vector<Vertex> normalVertices;
 
     for (const auto& row : surfaceVertices) {
@@ -91,86 +91,8 @@ Mesh SurfaceMesh::createNormalVisualizerMesh(const std::vector<std::vector<Verte
     return Mesh(normalVertices,camera, GL_LINES);
 }
 
-/* void SurfaceMesh::updateNormals() {
-    std ::cout << "updateNormals" << std::endl;
-    std::vector<glm::vec3> normals = generateNormals();
-    std ::cout << "updateNormals" << std::endl;
-    int numRows = m_verticesGrid.size();
-    int numCols = m_verticesGrid[0].size();
-    std::cout << "numRows: " << numRows << std::endl;
-    for (int i = 0; i < numRows; ++i) {
-        for (int j = 0; j < numCols; ++j) {
-            m_verticesGrid[i][j].normal = normals[i * numCols + j];
-        }
-    }
-}
 
-
-
-glm::vec3 SurfaceMesh::calculateNormal(glm::vec3 point1, glm::vec3 point2, glm::vec3 point3) {
-    glm::vec3 vector1 = point2 - point1;
-    glm::vec3 vector2 = point3 - point1;
-    glm::vec3 normal = glm::cross(vector1, vector2);
-    return glm::normalize(normal);
-}
-
-std::vector<glm::vec3> SurfaceMesh::generateNormals() {
-    int numRows = m_verticesGrid.size();
-    int numCols = m_verticesGrid[0].size();
-    std::vector<glm::vec3> normals(numRows * numCols, glm::vec3(0.0f, 0.0f, 0.0f));
-    std::vector<int> nbNormals(numRows * numCols, 0);
-
-    for (int i = 0; i < numRows - 1; ++i) {
-        for (int j = 0; j < numCols - 1; ++j) {
-            glm::vec3 normal1 = calculateNormal(
-                m_verticesGrid[i][j].position,
-                m_verticesGrid[i][j + 1].position,
-                m_verticesGrid[i + 1][j].position
-            );
-            glm::vec3 normal2 = calculateNormal(
-                m_verticesGrid[i + 1][j].position,
-                m_verticesGrid[i + 1][j + 1].position,
-                m_verticesGrid[i][j + 1].position
-            );
-
-            normals[i * numCols + j] += normal1;
-            normals[i * numCols + j + 1] += normal1 + normal2;
-            normals[(i + 1) * numCols + j] += normal1 + normal2;
-            normals[(i + 1) * numCols + j + 1] += normal2;
-
-            nbNormals[i * numCols + j]++;
-            nbNormals[i * numCols + j + 1] += 2;
-            nbNormals[(i + 1) * numCols + j] += 2;
-            nbNormals[(i + 1) * numCols + j + 1]++;
-                std::vector<unsigned int> disconnectedVertices;
-
-for (unsigned int i = 0; i < nbNormals.size(); i++) {
-    if (nbNormals[i] == 0) {
-        disconnectedVertices.push_back(i);
-        std::cout << "Disconnected vertex found at index: " << i << std::endl;
-    }
-}
-        }
-    }
-
-
-    for (int i = 0; i < numRows * numCols; ++i) {
-        normals[i] /= nbNormals[i];
-        normals[i] = glm::normalize(normals[i]);
-    }
-
-    return normals;
-} 
-
-std::vector<Vertex> SurfaceMesh::getVertices() const {
-    return m_vertices;
-}
-
-std::vector<std::vector<Vertex>> SurfaceMesh::getVerticesGrid() const {
-    return m_verticesGrid;
-}*/
-
-void SurfaceMesh::draw(Shader* shader,float ratio) const {
+void NormalMesh::draw(Shader* shader,float ratio) const {
     shader->use();
     glm::mat4 projection = glm::perspective(glm::radians(camera->getFOV()),ratio, 0.1f, 100.0f);
     glm::mat4 view = camera->getViewMatrix();

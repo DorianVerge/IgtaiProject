@@ -11,6 +11,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/main.dir/src/main.cpp.o.d"
   "CMakeFiles/main.dir/src/mesh.cpp.o"
   "CMakeFiles/main.dir/src/mesh.cpp.o.d"
+  "CMakeFiles/main.dir/src/normalMesh.cpp.o"
+  "CMakeFiles/main.dir/src/normalMesh.cpp.o.d"
   "CMakeFiles/main.dir/src/shader.cpp.o"
   "CMakeFiles/main.dir/src/shader.cpp.o.d"
   "CMakeFiles/main.dir/src/surfaceMesh.cpp.o"

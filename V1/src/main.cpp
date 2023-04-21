@@ -17,6 +17,8 @@ bool drawBezierSurface = false;
 bool drawNormal = false;
 bool drawParametric = false;
 bool STOP = true;
+bool drawNormalSurface = false;
+bool drawColoredNormal = false;
 float zoomLevel = 45.0f;
 float zRotationAngle = 0.0f;
 static float angle = 0.0f;
@@ -45,49 +47,41 @@ int main(int argc, char *argv[]) {
     glDisable(GL_BLEND);
     glDisable(GL_CULL_FACE);
 
-    Shader shader("shaders/vertexShader.glsl", "shaders/fragmentShader.glsl");
+    Light light0 = Light(0, glm::vec3(5.0f, 0.0f, 10.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+    Light light1 = Light(1, glm::vec3(-4.0f, 0.0f, 9.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+    Light light2 = Light(2, glm::vec3(-4.0f, 0.0f, -9.0f), glm::vec3(1.0f, 1.0f, 1.0f), 1.0f);
+    std::vector<Light*> lights = {&light0,&light1,&light2};
+
+    Shader shader("shaders/basicShaders/vertexShader.glsl", "shaders/basicShaders/fragmentShader.glsl");
+    Shader SurfaceShader("shaders/surfaceshader/vertexShader.glsl", "shaders/surfaceshader/fragmentShader.glsl");
     std::vector<Vertex> controlPoints= createControlPoints();
     std::vector<std::vector<Vertex>> controlPointsGrid = createControlGrid();
 
     BezierCurve bezierCurve(controlPoints);
     std::vector<Vertex> curvePoints = bezierCurve.discretizeUniformParametric(u);
-    Mesh curveMesh(curvePoints);
-    Mesh controlPolygonMesh(controlPoints);
-    std::cout << "Updated vertices:" << std::endl;
-        BezierSurface bezierSurface(controlPointsGrid);
-        std::cout << "Updated vertices:" << std::endl;
-        std::vector<std::vector<Vertex>> surfacePoints = bezierSurface.discretizeUniformParametric(u,v);
-    std::cout << "Updated vertices:" << std::endl;
-        SurfaceMesh surfaceMesh(surfacePoints,GL_TRIANGLES);
-    std::cout << "Updated vertices:" << std::endl;
-    // Access the vertices with updated normals from the surfaceMesh object
-    std::cout << "Updated vertices:" << std::endl;
-    //const std::vector<std::vector<Vertex>>& updatedVerticesGrid = surfaceMesh.getVerticesGrid();
+    Mesh curveMesh(curvePoints, &camera);
+    Mesh controlPolygonMesh(controlPoints, &camera);
 
-    std::cout << "Updated vertices:" << std::endl;
-    // Print the updated normals
-    //for (const auto &row : updatedVerticesGrid) {
-        //for (const auto &vertex : row) {
-        // std::cout << vertex.position.x << " " << vertex.position.y << " " << vertex.position.z << " "
-        //             << vertex.normal.x << " " << vertex.normal.y << " " << vertex.normal.z << std::endl;
-    // }
-    //}
+    BezierSurface bezierSurface(controlPointsGrid);
+
+    std::vector<std::vector<Vertex>> surfacePoints = bezierSurface.discretizeUniformParametric(u,v);
+
+    SurfaceMesh surfaceMesh(surfacePoints,lights, &camera,GL_TRIANGLES);
+    NormalMesh coloredNormalMesh(surfacePoints,lights, &camera,GL_TRIANGLES);
+
+
     if (drawParametric)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
-    Mesh NormalMesh= bezierSurface.createNormalVisualizerMesh(surfacePoints, 0.1f);
+    Mesh NormalMesh= surfaceMesh.createNormalVisualizerMesh(surfacePoints, 0.1f);
      
-    //Mesh NormalMesh= bezierSurface.createNormalVisualizerMesh(updatedVerticesGrid, 0.1f); 
 
-  //          for (const auto &vertex : surfacePoints) {
-    //            std::cout << vertex[0].position.x << " " << vertex[0].position.y << " " << vertex[0].position.z<< " " << vertex[0].normal.x << " " << vertex[0].normal.y << " " << vertex[0].normal.z << std::endl;
-            
-    //}
- 
+    
 
     glfwSetScrollCallback(window, scroll_callback);
     float deltaTime = 0.0f;
     float lastFrame = 0.0f;
+    float ratio;
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
@@ -100,35 +94,27 @@ int main(int argc, char *argv[]) {
         glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glm::mat4 projection = glm::perspective(glm::radians(camera.getFOV()), myWindow.getAspectRatio(), 0.1f, 100.0f);
-        glm::mat4 view = camera.getViewMatrix();
-        glm::mat4 model = glm::mat4(1.0f);
-
-        shader.setMat4("projection", projection);
-        shader.setMat4("view", view);
-        shader.setMat4("model", model);
-        shader.use();
-
-        glm::vec3 lightDirection(0.5f, -1.0f, 0.5f);
-        glm::vec3 lightColor(1.0f, 1.0f, 1.0f);
-        shader.setVec3("lightDirection", lightDirection);
-        shader.setVec3("lightColor", lightColor);
         glLineWidth(3.0f);
+        ratio=  myWindow.getAspectRatio();
         if (drawBezierCurve)
-            curveMesh.draw();
+            curveMesh.draw(&shader,ratio);
         if (drawControlPolygon)
-            controlPolygonMesh.draw();
+            controlPolygonMesh.draw(&shader,ratio);
         if (drawBezierSurface || drawParametric)
-            surfaceMesh.draw();
+            surfaceMesh.draw(&SurfaceShader,ratio);
         if (drawNormal)
-            NormalMesh.draw();
+            NormalMesh.draw(&shader, ratio);
+        if (drawNormalSurface){
+            NormalMesh.draw(&shader, ratio);
+            surfaceMesh.draw(&shader, ratio);
+        }
+        if (drawColoredNormal)
+            coloredNormalMesh.draw(&shader, ratio);
 
         glfwSwapBuffers(window);
         glfwPollEvents();
     }
         
-        
-        std::cout << "curve points"  << std::endl;
 
         return 0;
     }
@@ -149,20 +135,20 @@ std::vector<std::vector<Vertex>> controlPointsGrid = {
     {
         {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
         {glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
-        {glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
-        {glm::vec3(3.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
+        {glm::vec3(2.0f, 0.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.9f)},
+        {glm::vec3(3.0f, 0.0f, 0.0f), glm::vec3(0.5f, 0.0f, 0.0f)}
     },
     {
         {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
         {glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f)},
-        {glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
-        {glm::vec3(0.0f, 3.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
+        {glm::vec3(0.0f, 2.0f, 0.0f), glm::vec3(0.0f, 0.0f, 0.9f)},
+        {glm::vec3(0.0f, 3.0f, 0.0f), glm::vec3(0.5f, 0.0f, 0.0f)}
     },
     {
         {glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(1.0f, 0.0f, 0.0f)},
         {glm::vec3(0.0f, 0.0f, 1.0f), glm::vec3(0.0f, 1.0f, 0.5f)},
-        {glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 1.0f)},
-        {glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f)}
+        {glm::vec3(0.0f, 0.0f, 2.0f), glm::vec3(0.0f, 0.0f, 0.9f)},
+        {glm::vec3(0.0f, 0.0f, 3.0f), glm::vec3(0.5f, 0.0f, 0.0f)}
     }
 };
     return controlPointsGrid;
@@ -208,8 +194,14 @@ void parseCommandLineArguments(int argc, char *argv[]) {
         if (strcmp(argv[i], "-n") == 0) {
             drawNormal = true;
         }
+        if (strcmp(argv[i], "-ns") == 0) {
+            drawNormalSurface = true;
+        }
         if (strcmp(argv[i], "-t") == 0) {
             drawParametric = true;
+        }
+        if (strcmp(argv[i], "-nc") == 0) {
+            drawColoredNormal = true;
         }
     }
 }

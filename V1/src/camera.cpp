@@ -68,3 +68,4 @@ void Camera::processMouseScroll(float yOffset) {
         m_fov = 45.0f;
     }
 }
+

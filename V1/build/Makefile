@@ -273,6 +273,30 @@ src/mesh.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/mesh.cpp.s
 .PHONY : src/mesh.cpp.s
 
+src/normalMesh.o: src/normalMesh.cpp.o
+.PHONY : src/normalMesh.o
+
+# target to build an object file
+src/normalMesh.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/normalMesh.cpp.o
+.PHONY : src/normalMesh.cpp.o
+
+src/normalMesh.i: src/normalMesh.cpp.i
+.PHONY : src/normalMesh.i
+
+# target to preprocess a source file
+src/normalMesh.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/normalMesh.cpp.i
+.PHONY : src/normalMesh.cpp.i
+
+src/normalMesh.s: src/normalMesh.cpp.s
+.PHONY : src/normalMesh.s
+
+# target to generate assembly for a file
+src/normalMesh.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/src/normalMesh.cpp.s
+.PHONY : src/normalMesh.cpp.s
+
 src/shader.o: src/shader.cpp.o
 .PHONY : src/shader.o
 
@@ -372,6 +396,9 @@ help:
 	@echo "... src/mesh.o"
 	@echo "... src/mesh.i"
 	@echo "... src/mesh.s"
+	@echo "... src/normalMesh.o"
+	@echo "... src/normalMesh.i"
+	@echo "... src/normalMesh.s"
 	@echo "... src/shader.o"
 	@echo "... src/shader.i"
 	@echo "... src/shader.s"

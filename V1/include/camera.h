@@ -16,6 +16,7 @@ public:
     void processKeyboardInput(GLFWwindow *window, float deltaTime);
     float getFOV() const { return m_fov; }
     void processMouseScroll(float yOffset);
+    glm::vec3 getPosition() const { return m_position; }
 
 private:
     glm::vec3 m_position;

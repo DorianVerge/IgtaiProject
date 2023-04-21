@@ -307,6 +307,10 @@ CMakeFiles/main.dir/src/bezierCurve.cpp.o: \
  /usr/include/c++/11/bits/istream.tcc \
  /home/dodo/workplace/IgtaiProject-1/V1/include/window.h \
  /home/dodo/workplace/IgtaiProject-1/V1/include/shader.h \
+ /usr/include/c++/11/fstream /usr/include/c++/11/bits/codecvt.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
+ /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
+ /usr/include/c++/11/bits/fstream.tcc \
  /usr/include/glm/gtc/matrix_transform.hpp \
  /usr/include/glm/ext/matrix_projection.hpp \
  /usr/include/glm/gtc/constants.hpp \
@@ -354,9 +358,11 @@ CMakeFiles/main.dir/src/bezierCurve.cpp.o: \
  /usr/include/string.h /usr/include/strings.h \
  /usr/include/glm/gtc/type_ptr.inl \
  /home/dodo/workplace/IgtaiProject-1/V1/include/mesh.h \
+ /home/dodo/workplace/IgtaiProject-1/V1/include/camera.h \
+ /home/dodo/workplace/IgtaiProject-1/V1/include/light.h \
+ /home/dodo/workplace/IgtaiProject-1/V1/include/normalMesh.h \
  /home/dodo/workplace/IgtaiProject-1/V1/include/bezierSurface.h \
  /home/dodo/workplace/IgtaiProject-1/V1/include/surfaceMesh.h \
- /home/dodo/workplace/IgtaiProject-1/V1/include/camera.h \
  /usr/include/c++/11/chrono /usr/include/c++/11/ratio \
  /usr/include/c++/11/ctime /usr/include/c++/11/bits/parse_numbers.h \
  /usr/include/c++/11/thread /usr/include/c++/11/bits/std_thread.h \
@@ -365,9 +371,5 @@ CMakeFiles/main.dir/src/bezierCurve.cpp.o: \
  /usr/include/c++/11/bits/uses_allocator.h \
  /usr/include/c++/11/bits/invoke.h /usr/include/c++/11/bits/refwrap.h \
  /usr/include/c++/11/bits/unique_ptr.h \
- /usr/include/c++/11/bits/this_thread_sleep.h /usr/include/c++/11/fstream \
- /usr/include/c++/11/bits/codecvt.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/basic_file.h \
- /usr/include/x86_64-linux-gnu/c++/11/bits/c++io.h \
- /usr/include/c++/11/bits/fstream.tcc /usr/include/c++/11/sstream \
+ /usr/include/c++/11/bits/this_thread_sleep.h /usr/include/c++/11/sstream \
  /usr/include/c++/11/bits/sstream.tcc

@@ -3,16 +3,18 @@
 #include <vector>
 #include <glad/glad.h>
 #include <vertex.h>
-
+#include <shader.h>
+#include <camera.h>
 class Mesh
 {
 public:
     Mesh() = default;
-    Mesh( std::vector<Vertex> vertices,GLenum drawMode = GL_LINE_STRIP);
+    Mesh( std::vector<Vertex> vertices, Camera* camera,GLenum drawMode = GL_LINE_STRIP);
     Mesh(std::vector<Vertex> vertices, std::vector<GLuint> indices, GLenum drawMode = GL_LINE_STRIP);
     ~Mesh();
-    void draw() const;
+    void draw(Shader* shader, float ratio) const;
     unsigned int getNumVertices() const;
+    Camera *camera;
     
 private:
     unsigned int numVertices;

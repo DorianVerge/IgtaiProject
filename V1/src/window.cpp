@@ -47,7 +47,7 @@ Window::Window()  {
     glfwSetWindowSizeCallback(window, window_size_callback);
     // Charger l'image
     int icon_width, icon_height, icon_channels;
-    unsigned char* icon_data = stbi_load("objects/SaleGeuleD'Andrew.png", &icon_width, &icon_height, &icon_channels, 0);
+    unsigned char* icon_data = stbi_load("objects/Onizuka.png", &icon_width, &icon_height, &icon_channels, 0);
     // Définir l'icône de la fenêtre
     if (icon_data)
     {

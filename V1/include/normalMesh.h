@@ -9,9 +9,9 @@
 #include <light.h>
 
 
-class SurfaceMesh {
+class NormalMesh {
     public:
-        SurfaceMesh(const std::vector<std::vector<Vertex>>& verticesGrid,std::vector<Light*> lights  ,Camera* camera, GLenum drawMode);
+        NormalMesh(const std::vector<std::vector<Vertex>>& verticesGrid,std::vector<Light*> lights  ,Camera* camera, GLenum drawMode);
         void draw(Shader* shader,float ratio ) const;
         Mesh createNormalVisualizerMesh(const std::vector<std::vector<Vertex>>& surfaceVertices, float normalLength);
 

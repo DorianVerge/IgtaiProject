@@ -1,7 +1,13 @@
 #include "defines.h"
+#include "mesh.h"
+#include "shader.h"
+#include "camera.h"
+#include <iostream>
+#include <glm/glm.hpp>
 
-Mesh::Mesh(std::vector<Vertex> vertices,GLenum drawMode) : drawMode(drawMode)
+Mesh::Mesh(std::vector<Vertex> vertices,Camera* camera,GLenum drawMode) : drawMode(drawMode)
 {
+    this->camera=camera;
     numVertices=vertices.size();
     //std::cout << "numVertices" << numVertices << std::endl;
     glGenVertexArrays(1, &VAO);
@@ -59,8 +65,16 @@ Mesh::~Mesh()
     glDeleteBuffers(1, &EBO);
 }
 
-void Mesh::draw() const
+void Mesh::draw(Shader* shader, float ratio) const
 {
+    glm::mat4 projection = glm::perspective(glm::radians(camera->getFOV()),ratio, 0.1f, 100.0f);
+    glm::mat4 view = camera->getViewMatrix();
+    glm::mat4 model = glm::mat4(1.0f);
+
+    shader->setMat4("projection", projection);
+    shader->setMat4("view", view);
+    shader->setMat4("model", model);
+    shader->use();
     glBindVertexArray(VAO);
     if (numIndices > 0) {
         glDrawElements(drawMode, numIndices, GL_UNSIGNED_INT, 0);
@@ -69,3 +83,4 @@ void Mesh::draw() const
     }
     glBindVertexArray(0);
 }
+

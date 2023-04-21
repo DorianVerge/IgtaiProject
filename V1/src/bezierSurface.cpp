@@ -1,5 +1,6 @@
 #include "bezierSurface.h"
 #include "defines.h"
+#include "shader.h"
 
 BezierSurface::BezierSurface(const std::vector<std::vector<Vertex>>& controlPointsGrid)
     : controlPointsGrid(controlPointsGrid) {}
@@ -93,26 +94,3 @@ Vertex BezierSurface::evaluatePartialV(float u, float v) const {
     return finalCurve.evaluate(u);
 }
 
-Mesh BezierSurface::createNormalVisualizerMesh(const std::vector<std::vector<Vertex>>& surfaceVertices, float normalLength) {
-    std::vector<Vertex> normalVertices;
-
-    for (const auto& row : surfaceVertices) {
-        for (const auto& vertex : row) {
-            // Add the original vertex position
-            normalVertices.push_back({
-                vertex.position,
-                glm::vec3(1.0f, 1.0f, 1.0f),
-                glm::vec3(0.0f)
-            });
-
-            // Add the offset vertex position
-            normalVertices.push_back({
-                vertex.position + vertex.normal * normalLength,
-                glm::vec3(1.0f, 1.0f, 1.0f),
-                glm::vec3(0.0f)
-            });
-        }
-    }
-
-    return Mesh(normalVertices, GL_LINES);
-}
